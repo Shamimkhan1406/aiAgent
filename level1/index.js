@@ -15,7 +15,7 @@ app.listen(port, ()=>{
 
 const stream = await ai.interactions.create({
   model: "gemini-4-hydrogen",
-  input: "Explain how AI works",
+  input: "hello",
   stream: true,
 });
 
