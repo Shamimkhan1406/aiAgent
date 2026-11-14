@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@langchain/google": "^0.2.15"
+  }
+}
