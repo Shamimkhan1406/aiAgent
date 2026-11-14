@@ -8,18 +8,28 @@ const ai = new GoogleGenAI({
 
 
 const app = express();
+app.use(express.json());
 const port = process.env.PORT || 4000;
 app.listen(port, ()=>{
     console.log("server started at port :",port);
 });
 
-const stream = await ai.interactions.create({
-  model: "gemini-4-hydrogen",
-  input: "hello",
-  stream: true,
-});
+// const stream = await ai.interactions.create({
+//   model: "gemini-4-hydrogen",
+//   input: "hello",
+//   stream: true,
+// });
 
-for await (const event of stream) {
-  console.log(event);
-}
+// for await (const event of stream) {
+//   console.log(event);
+// }
 
+app.post('/chat', async (req,res)=>{
+    const {prompt} = req.body
+    const response = await ai.interactions.create({
+        model: "gemini-4-hydrogen",
+        input: prompt
+    });
+    return res.json(response.output_text)
+
+})
